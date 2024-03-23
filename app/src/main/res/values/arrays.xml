@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="search_requests">
+        <item>@string/contrast</item>
+        <item>@string/brightness</item>
+        <item>@string/saturation</item>
+        <item>@string/about_app</item>
+        <item>@string/send_feedback</item>
+        <item>@string/rate_app</item>
+        <item>@string/change_theme</item>
+        <item>@string/sounds</item>
+        <item>@string/log_out</item>
+        <item>@string/account_settings</item>
+        <item>@string/delete_account</item>
+        <item>@string/appearance_settings</item>
+        <item>@string/reset_settings</item>
+        <item>@string/chat_settings</item>
+    </string-array>
+</resources>

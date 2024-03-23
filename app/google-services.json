@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1081715502963",
+    "project_id": "darknessmessenger-90a55",
+    "storage_bucket": "darknessmessenger-90a55.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1081715502963:android:4e502ee1de674c18a9df06",
+        "android_client_info": {
+          "package_name": "com.ds.messengerapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQsV0vr4h2Y0LlXjzg7FsOYUkpgnLBQCo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

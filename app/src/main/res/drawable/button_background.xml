@@ -1,0 +1,14 @@
+<shape xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle"
+    tools:ignore="MissingDefaultResource">
+    <solid
+        android:color="@color/buttons"/>
+    <corners
+        android:bottomRightRadius="13dp"
+        android:bottomLeftRadius="13dp"
+        android:topLeftRadius="13dp"
+        android:topRightRadius="13dp"/>
+    <stroke
+        android:color="#ffffff"
+        android:width="2dp"/>
+</shape>
