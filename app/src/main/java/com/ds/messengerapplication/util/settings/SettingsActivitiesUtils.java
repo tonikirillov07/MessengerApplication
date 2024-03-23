@@ -13,6 +13,6 @@ public abstract class SettingsActivitiesUtils {
     public static final Class<MainSettingsPage> MAIN_ACTIVITY_PAGE = MainSettingsPage.class;
 
     public static void addActionToBackButton(AppCompatActivity activity, @NonNull ImageButton imageButton, Class goToActivityClass){
-        imageButton.setOnClickListener(v -> Utils.onSettingButtonClick(imageButton, () -> AnotherActivity.gotoAnotherActivity(activity, goToActivityClass, false)));
+        imageButton.setOnClickListener(v -> Utils.onDefaultButtonClick(imageButton, () -> AnotherActivity.gotoAnotherActivity(activity, goToActivityClass, false)));
     }
 }

@@ -69,26 +69,26 @@
 
         <ImageButton
             android:id="@+id/mainButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:background="#00FFFFFF"
+            android:contentDescription="@string/main"
             android:elevation="10dp"
             android:tag="@string/main_page_image_button_tag"
-            android:contentDescription="@string/main"
             app:srcCompat="@drawable/mainicon_button" />
 
         <ImageButton
             android:id="@+id/messengerButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:background="#00FFFFFF"
+            android:contentDescription="@string/chat"
             android:elevation="10dp"
             android:tag="@string/chat_page_image_button_tag"
-            android:contentDescription="@string/chat"
             app:srcCompat="@drawable/messenger_button" />
 
     </LinearLayout>

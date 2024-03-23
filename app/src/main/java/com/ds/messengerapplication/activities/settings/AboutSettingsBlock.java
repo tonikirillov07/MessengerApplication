@@ -8,6 +8,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.ds.messengerapplication.R;
+import com.ds.messengerapplication.util.ControlsBar;
+import com.ds.messengerapplication.util.Utils;
+import com.ds.messengerapplication.util.settings.SettingsActivitiesUtils;
+
 public class AboutSettingsBlock extends AppCompatActivity {
     private TextView appNameTextView, versionTextView, buildTextView, developerTextView;
     private LinearLayout appInfoLinearLayout;
@@ -25,6 +30,8 @@ public class AboutSettingsBlock extends AppCompatActivity {
         ImageButton backButton = findViewById(R.id.getBackToMainSettingsButton);
 
         SettingsActivitiesUtils.addActionToBackButton(this, backButton, SettingsActivitiesUtils.MAIN_ACTIVITY_PAGE);
+        ControlsBar.initActions(this, findViewById(R.id.mainButton), findViewById(R.id.messengerButton));
+
         loadAppInfo();
     }
 

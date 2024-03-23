@@ -15,6 +15,7 @@ import com.ds.messengerapplication.dialogs.ConfirmDialog;
 import com.ds.messengerapplication.dialogs.ErrorDialog;
 import com.ds.messengerapplication.user.UserController;
 import com.ds.messengerapplication.util.AnotherActivity;
+import com.ds.messengerapplication.util.ControlsBar;
 import com.ds.messengerapplication.util.Utils;
 
 import java.util.Objects;
@@ -40,7 +41,7 @@ public class MainSettingsUserBlock extends AppCompatActivity {
             userMailTextView = findViewById(R.id.userNameTextView);
             dateOfRegTextView = findViewById(R.id.dateOfRegTextView);
             deleteAccountButton = findViewById(R.id.deleteAccountButton);
-            logOutAccountButton = findViewById(R.id.logOutButton);
+            logOutAccountButton = findViewById(R.id.logOutAccountButton);
             avatarView = findViewById(R.id.userAvatar);
             backButton = findViewById(R.id.backButton);
             changeEmailButton = findViewById(R.id.changeEmailButton);
@@ -60,22 +61,21 @@ public class MainSettingsUserBlock extends AppCompatActivity {
 
     private void initButtons() {
         try{
-            deleteAccountButton.setOnClickListener(click -> Utils.onSettingButtonClick(deleteAccountButton, () -> ConfirmDialog.showDialog(this, getResources().getString(R.string.account_deleting_confirm), () -> {
+            deleteAccountButton.setOnClickListener(click -> Utils.onDefaultButtonClick(deleteAccountButton, () -> ConfirmDialog.showDialog(this, getResources().getString(R.string.account_deleting_confirm), () -> {
                 try {
                     Objects.requireNonNull(UserController.getInstance().getFirebaseAuth().getCurrentUser()).delete();
                     UserController.logOut();
-                    openLogInActivity();
-                    finishAffinity();
+                    UserController.getInstance().getFirebaseAuth().getCurrentUser().delete();
+                    goToLogInActivity();
                 }catch (Exception e){
                     ErrorDialog.showDialog(this, e, true);
                 }
             }, android.R.drawable.ic_dialog_alert)));
 
-            logOutAccountButton.setOnClickListener(click -> Utils.onSettingButtonClick(logOutAccountButton, () -> {
+            logOutAccountButton.setOnClickListener(click -> Utils.onDefaultButtonClick(logOutAccountButton, () -> {
                 try {
                     UserController.logOut();
-                    openLogInActivity();
-                    finishAffinity();
+                    goToLogInActivity();
                 }catch (Exception e){
                     ErrorDialog.showDialog(this, e, true);
                 }
@@ -84,9 +84,16 @@ public class MainSettingsUserBlock extends AppCompatActivity {
             backButton.setOnClickListener(click -> AnotherActivity.gotoAnotherActivity(this, MainSettingsPage.class, false));
             switchStatus.setOnClickListener(click -> switchStatus());
             changeEmailButton.setOnClickListener(click -> {});
+
+            ControlsBar.initActions(this, findViewById(R.id.mainButton), findViewById(R.id.messengerButton));
         }catch (Exception e){
             ErrorDialog.showDialog(this, e, true);
         }
+    }
+
+    private void goToLogInActivity(){
+        openLogInActivity();
+        finishAffinity();
     }
 
     private void switchStatus(){

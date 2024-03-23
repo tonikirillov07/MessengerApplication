@@ -6,7 +6,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ds.messengerapplication.R;
-import com.ds.projecthelper.dialogs.ErrorDialog;
+import com.ds.messengerapplication.dialogs.ErrorDialog;
 
 public class ThanksForFeedbackActivity extends AppCompatActivity {
     @Override

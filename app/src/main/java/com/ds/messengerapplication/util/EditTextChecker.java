@@ -4,7 +4,7 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 
-import com.ds.projecthelper.dialogs.ErrorDialog;
+import com.ds.messengerapplication.dialogs.ErrorDialog;
 
 public final class EditTextChecker {
     public static void checkField(@NonNull EditText editText, String fieldName, int minLength){

@@ -5,8 +5,9 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.ds.messengerapplication.dialogs.ErrorDialog;
 import com.ds.messengerapplication.util.IOnAction;
-import com.ds.projecthelper.dialogs.ErrorDialog;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -34,14 +35,16 @@ public class UserController {
         return getInstance().getFirebaseAuth().getCurrentUser() != null;
     }
 
-    public static void createUser(String email, String password, IOnAction onSuccessfulAction, Context context){
+    public static void createUser(String email, String password, IOnAction onAction, Context context){
         getInstance().getFirebaseAuth().createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
             if(task.isSuccessful()) {
-                onSuccessfulAction.onAction();
+                onAction.onAction();
 
                 Log.i(UserController.class.getName(), "User with email " + email + " created successfully");
             } else {
                 ErrorDialog.showDialog(context, Objects.requireNonNull(task.getException()), true);
+
+                onAction.onFailed();
             }
         });
     }
@@ -61,14 +64,16 @@ public class UserController {
         });
     }
 
-    public static void logIn(String email, String password, IOnAction onSuccessfulAction, Context context){
+    public static void logIn(String email, String password, IOnAction onAction, Context context){
         getInstance().getFirebaseAuth().signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
             if(task.isSuccessful()){
-                onSuccessfulAction.onAction();
+                onAction.onAction();
 
                 Log.i(UserController.class.getName(), "User with email " + email + " logged in successfully");
             }else{
                 ErrorDialog.showDialog(context, Objects.requireNonNull(task.getException()), true);
+
+                onAction.onFailed();
             }
         });
 

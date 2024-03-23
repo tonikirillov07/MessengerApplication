@@ -12,4 +12,5 @@
     <color name="almost_transparent">#083088</color>
     <color name="green">#008000</color>
     <color name="gray">#A9A9A9</color>
+    <color name="transparent">#00FFFFFF</color>
 </resources>

@@ -1,8 +1,13 @@
 package com.ds.messengerapplication.user;
 
+import static com.ds.messengerapplication.user.UserAdditionalInfo.DefaultValues.*;
 
+import androidx.annotation.NonNull;
 
+import com.ds.messengerapplication.util.Colors;
 import com.ds.messengerapplication.util.Utils;
+
+import org.jetbrains.annotations.Contract;
 
 import java.util.List;
 
@@ -14,13 +19,12 @@ public class UserAdditionalInfo {
     private boolean useSounds;
     private String theme;
     private int userAvatarColor;
-    private List<String> usingPLs;
     private String dateOfRegistration;
 
     public UserAdditionalInfo() {
     }
 
-    public UserAdditionalInfo(float saturation, float contrast, float brightness, boolean useScrollBars, boolean useSounds, String theme, int userAvatarColor, List<String> usingPLs, String dateOfRegistration) {
+    public UserAdditionalInfo(float saturation, float contrast, float brightness, boolean useScrollBars, boolean useSounds, String theme, int userAvatarColor, String dateOfRegistration) {
         this.saturation = saturation;
         this.contrast = contrast;
         this.brightness = brightness;
@@ -28,7 +32,6 @@ public class UserAdditionalInfo {
         this.useScrollBars = useScrollBars;
         this.theme = theme;
         this.userAvatarColor = userAvatarColor;
-        this.usingPLs = usingPLs;
         this.dateOfRegistration = dateOfRegistration;
     }
 
@@ -88,13 +91,6 @@ public class UserAdditionalInfo {
         this.userAvatarColor = userAvatarColor;
     }
 
-    public List<String> getUsingPLs() {
-        return usingPLs;
-    }
-
-    public void setUsingPLs(List<String> usingPLs) {
-        this.usingPLs = usingPLs;
-    }
 
     public String getDateOfRegistration() {
         return dateOfRegistration;
@@ -104,13 +100,19 @@ public class UserAdditionalInfo {
         this.dateOfRegistration = dateOfRegistration;
     }
 
+    @NonNull
+    @Contract(" -> new")
+    public static UserAdditionalInfo getWithDefaultValues(){
+        return new UserAdditionalInfo(DEFAULT_SATURATION, DEFAULT_CONTRAST, DEFAULT_BRIGHTNESS, DEFAULT_USE_SCROLL_BARS, DEFAULT_USE_SOUNDS, DEFAULT_THEME, Colors.getRandomColor(), AUTO_DATE);
+    }
+
     public abstract static class DefaultValues{
         public static final float DEFAULT_SATURATION = 0.5f;
         public static final float DEFAULT_CONTRAST = 0.5f;
         public static final float DEFAULT_BRIGHTNESS = 0.5f;
         public static final boolean DEFAULT_USE_SCROLL_BARS = true;
         public static final boolean DEFAULT_USE_SOUNDS = true;
-        public static final String DEFAULT_THEME = "night";
+        public static final String DEFAULT_THEME = "Dark Theme";
         public static final String AUTO_DATE = Utils.getDate();
     }
 }

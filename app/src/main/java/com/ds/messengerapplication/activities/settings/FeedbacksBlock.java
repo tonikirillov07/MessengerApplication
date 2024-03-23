@@ -10,9 +10,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.ds.messengerapplication.R;
 import com.ds.messengerapplication.activities.ThanksForFeedbackActivity;
+import com.ds.messengerapplication.dialogs.ErrorDialog;
 import com.ds.messengerapplication.util.AnotherActivity;
+import com.ds.messengerapplication.util.ControlsBar;
 import com.ds.messengerapplication.util.settings.SettingsActivitiesUtils;
-import com.ds.projecthelper.dialogs.ErrorDialog;
 import com.google.android.material.slider.Slider;
 
 public class FeedbacksBlock extends AppCompatActivity {
@@ -36,6 +37,7 @@ public class FeedbacksBlock extends AppCompatActivity {
             backButton = findViewById(R.id.backImageButton);
 
             initButtons();
+            sliderRate.addOnChangeListener((slider, value, fromUser) -> isSliderRateWasInteract = fromUser);
         }catch (Exception e){
             ErrorDialog.showDialog(this, e, true);
         }
@@ -46,7 +48,8 @@ public class FeedbacksBlock extends AppCompatActivity {
             SettingsActivitiesUtils.addActionToBackButton(this, backButton, SettingsActivitiesUtils.MAIN_ACTIVITY_PAGE);
             buttonNext.setOnClickListener(click -> sendFeedbackButtonAction());
             buttonRate.setOnClickListener(click -> onRateButton());
-            sliderRate.addOnChangeListener((slider, value, fromUser) -> isSliderRateWasInteract = fromUser);
+
+            ControlsBar.initActions(this, findViewById(R.id.mainButton), findViewById(R.id.messengerButton));
         }catch (Exception e){
             ErrorDialog.showDialog(this, e, true);
         }

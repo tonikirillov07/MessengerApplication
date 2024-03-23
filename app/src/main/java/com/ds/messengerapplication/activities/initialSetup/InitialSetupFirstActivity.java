@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import com.ds.messengerapplication.R;
+import com.ds.messengerapplication.activities.chat.ChatsListPage;
 import com.ds.messengerapplication.dialogs.ErrorDialog;
 import com.ds.messengerapplication.user.UserController;
 import com.ds.messengerapplication.util.AnotherActivity;
+import com.google.firebase.FirebaseApp;
 
 
 public class InitialSetupFirstActivity extends AppCompatActivity {
@@ -36,7 +38,7 @@ public class InitialSetupFirstActivity extends AppCompatActivity {
     }
 
     private void checkAuthorization(){
-        //if(UserController.isSignedIn()) AnotherActivity.gotoAnotherActivity(this, MainPage.class, true);
+        if(UserController.isSignedIn()) AnotherActivity.gotoAnotherActivity(this, ChatsListPage.class, true);
     }
 
 }

@@ -14,6 +14,8 @@ import com.ds.messengerapplication.dialogs.ErrorDialog;
 import com.ds.messengerapplication.user.UserController;
 import com.ds.messengerapplication.user.database.databaseGetterAndSetter.DatabaseValueSetter;
 import com.ds.messengerapplication.user.database.databaseGetterAndSetter.DatabaseValuesGetter;
+import com.ds.messengerapplication.user.database.databaseInterfaces.IOnStringValueFoundInDatabase;
+import com.ds.messengerapplication.util.ControlsBar;
 import com.ds.messengerapplication.util.Utils;
 import com.ds.messengerapplication.util.settings.SettingsActivitiesUtils;
 import com.google.android.material.slider.Slider;
@@ -45,6 +47,8 @@ public class AppearanceSettingsBlock extends AppCompatActivity {
             useScrollBarsCheckBox = findViewById(R.id.showScrollBarsCheckBox);
 
             SettingsActivitiesUtils.addActionToBackButton(this, findViewById(R.id.getBackImageButton), SettingsActivitiesUtils.MAIN_ACTIVITY_PAGE);
+            ControlsBar.initActions(this, findViewById(R.id.mainButton), findViewById(R.id.messengerButton));
+
             initSettingsStates();
             initSliders();
             initThemeRadioButtonsGroup();

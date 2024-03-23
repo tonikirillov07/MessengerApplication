@@ -3,6 +3,7 @@ package com.ds.messengerapplication.util;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -14,11 +15,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.ds.projecthelper.Constants;
-import com.ds.projecthelper.R;
-import com.ds.projecthelper.dialogs.ErrorDialog;
-import com.ds.projecthelper.user.UserController;
-import com.ds.projecthelper.user.database.databaseGetterAndSetter.DatabaseValuesGetter;
+import com.ds.messengerapplication.Constants;
+import com.ds.messengerapplication.R;
+import com.ds.messengerapplication.dialogs.ErrorDialog;
+import com.ds.messengerapplication.user.UserController;
+import com.ds.messengerapplication.user.database.databaseGetterAndSetter.DatabaseValuesGetter;
+import com.ds.messengerapplication.user.database.databaseInterfaces.IOnStringValueFoundInDatabase;
 import com.google.android.gms.tasks.Task;
 
 import org.jetbrains.annotations.NotNull;
@@ -86,10 +88,19 @@ public abstract class Utils extends Constants {
         }
     }
 
-   public static void onSettingButtonClick(View view, @NonNull IOnAction onAction){
-        Utils.addAlphaAnimation(view, 0.5f,1);
+   public static void onDefaultButtonClick(View view, @NonNull IOnAction onAction){
+        try {
+            Utils.addAlphaAnimation(view, 0.5f, 1);
 
-        onAction.onAction();
+            onAction.onAction();
+        }catch (Exception e){
+            ErrorDialog.showDialog(view.getContext(), e, true);
+            onAction.onFailed();
+        }
+    }
+
+    public static void failedInExecutingTask(){
+        ErrorDialog.makeErrorLog(new RuntimeException("Failed in executing task"));
     }
 
     public static @NotNull String getDate(){
@@ -102,7 +113,7 @@ public abstract class Utils extends Constants {
         try{
             String userId = UserController.getUserId();
 
-            DatabaseValuesGetter.findValue(userId, Constants.USER_AVATAR_COLOR_REFERENCE_PATH, context, result ->  avatarView.setAvatarInitialsBackgroundColor(Integer.parseInt(result)));
+            DatabaseValuesGetter.findValue(userId, Constants.USER_AVATAR_COLOR_REFERENCE_PATH, context, result -> avatarView.setAvatarInitialsBackgroundColor(Integer.parseInt(result)));
             DatabaseValuesGetter.findValue(userId, Constants.USER_DATE_OF_REGISTRATION_REFERENCE_PATH, context, result -> dateOfRegistration.setText(context.getResources().getString(R.string.registered_at) + " " + result));
 
             displayEmail(userMailTextView);

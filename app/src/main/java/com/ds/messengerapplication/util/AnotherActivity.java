@@ -4,7 +4,7 @@ import android.content.Intent;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.ds.projecthelper.dialogs.ErrorDialog;
+import com.ds.messengerapplication.dialogs.ErrorDialog;
 
 public abstract class AnotherActivity {
     public static void gotoAnotherActivity(AppCompatActivity appCompatActivity, Class activityClass, boolean destroyPreviousActivity){

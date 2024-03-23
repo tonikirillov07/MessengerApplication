@@ -22,7 +22,7 @@ public final class ErrorDialog {
         }
     }
 
-    private static void makeErrorLog(@NonNull Exception e){
+    public static void makeErrorLog(@NonNull Exception e){
         Log.e(ErrorDialog.class.getSimpleName(), e.toString());
 
         e.printStackTrace();

@@ -2,8 +2,8 @@ package com.ds.messengerapplication.user;
 
 import android.content.Context;
 
+import com.ds.messengerapplication.Constants;
 import com.ds.messengerapplication.user.database.databaseGetterAndSetter.DatabaseValuesGetter;
-import com.ds.projecthelper.Constants;
 
 import java.util.Objects;
 

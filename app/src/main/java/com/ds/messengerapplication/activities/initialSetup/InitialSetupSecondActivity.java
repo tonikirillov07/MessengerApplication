@@ -6,6 +6,8 @@ import static com.ds.messengerapplication.Constants.TEMP_PASSWORD_STORE_EXTRA_KE
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,11 +17,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ds.messengerapplication.R;
+import com.ds.messengerapplication.activities.chat.ChatsListPage;
 import com.ds.messengerapplication.activities.services.RestorePasswordActivity;
 import com.ds.messengerapplication.dialogs.ErrorDialog;
+import com.ds.messengerapplication.user.User;
+import com.ds.messengerapplication.user.UserAdditionalInfo;
 import com.ds.messengerapplication.user.UserController;
+import com.ds.messengerapplication.user.database.Database;
 import com.ds.messengerapplication.util.AnotherActivity;
 import com.ds.messengerapplication.util.EditTextChecker;
+import com.ds.messengerapplication.util.IOnAction;
 import com.ds.messengerapplication.util.Utils;
 
 public class InitialSetupSecondActivity extends AppCompatActivity {
@@ -41,32 +48,52 @@ public class InitialSetupSecondActivity extends AppCompatActivity {
             iHaveAccount = findViewById(R.id.iHaveAccount);
             iForgotMyPassword = findViewById(R.id.iForgotPassword);
 
-            buttonNext.setOnClickListener(v -> onNextButtonAction());
+            buttonNext.setOnClickListener(v -> onNextButtonAction(this));
             iHaveAccount.setOnClickListener(v -> onHaveAccountButtonAction());
             iForgotMyPassword.setOnClickListener(v -> AnotherActivity.gotoAnotherActivity(this, RestorePasswordActivity.class, false));
+
+            addTextFieldsTextChangeListener(loginField);
+            addTextFieldsTextChangeListener(passwordField);
         }catch (Exception e){
             ErrorDialog.showDialog(this, e, true);
         }
     }
 
-    private void onNextButtonAction(){
+    private void onNextButtonAction(AppCompatActivity activity){
         try {
             buttonNext.setEnabled(false);
 
             if (checkForEnteredData()) {
                 if(!logInIsOpen) {
-                    UserController.createUser(getLoginText(), getPasswordText(), () -> {
-                        Intent intent = new Intent(this, InitialSetupThirdActivity.class);
-                        intent.putExtra(TEMP_PASSWORD_STORE_EXTRA_KEY, getPasswordText());
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
-                        finish();
+                    UserController.createUser(getLoginText(), getPasswordText(), new IOnAction() {
+                        @Override
+                        public void onAction() {
+                            Database.writeNewUser(new User(getLoginText(), getPasswordText()), UserAdditionalInfo.getWithDefaultValues(), activity);
+                            AnotherActivity.gotoAnotherActivity(activity, ChatsListPage.class, true);
+                            buttonNext.setEnabled(true);
+                        }
+
+                        @Override
+                        public void onFailed() {
+                            buttonNext.setEnabled(true);
+                        }
                     }, this);
                 }else
-                    UserController.logIn(getLoginText(), getPasswordText(), () -> AnotherActivity.gotoAnotherActivity(this, MainPage.class, true), this);
-            } else findErrorReason();
+                    UserController.logIn(getLoginText(), getPasswordText(), new IOnAction() {
+                        @Override
+                        public void onAction() {
+                            AnotherActivity.gotoAnotherActivity(activity, ChatsListPage.class, true);
+                            buttonNext.setEnabled(true);
+                        }
 
-            buttonNext.setEnabled(true);
+                        @Override
+                        public void onFailed() {
+                            IOnAction.super.onFailed();
+
+                            buttonNext.setEnabled(true);
+                        }
+                    }, this);
+            } else findErrorReason();
         }catch (Exception e){
             ErrorDialog.showDialog(this, e, true);
         }
@@ -112,4 +139,22 @@ public class InitialSetupSecondActivity extends AppCompatActivity {
         return passwordField.getText().toString().trim();
     }
 
+    private void addTextFieldsTextChangeListener(@NonNull EditText editText){
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(!buttonNext.isEnabled()) buttonNext.setEnabled(true);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
 }

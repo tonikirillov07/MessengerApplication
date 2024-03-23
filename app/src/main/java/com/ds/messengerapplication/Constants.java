@@ -22,7 +22,6 @@ public abstract class Constants {
     public static final String USER_SATURATION_REFERENCE_PATH = "user_saturation";
     public static final String USER_THEME_REFERENCE_PATH = "user_theme";
     public static final String USER_USE_SOUNDS_REFERENCE_PATH = "user_use_sounds";
-    public static final String USER_USING_PLS_REFERENCE_PATH = "user_using_pls";
     public static final String USER_USE_SCROLL_BARS_REFERENCE_PATH = "user_use_scroll_bars";
     public static final String USER_DATE_OF_REGISTRATION_REFERENCE_PATH = "user_date_of_registration";
     public static final String TEMP_PASSWORD_STORE_EXTRA_KEY = "password";

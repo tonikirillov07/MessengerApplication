@@ -1,10 +1,13 @@
 package com.ds.messengerapplication.user.database.databaseGetterAndSetter;
 
 import android.content.Context;
+import android.util.Log;
 
+import com.ds.messengerapplication.dialogs.ErrorDialog;
 import com.ds.messengerapplication.user.database.Database;
 import com.ds.messengerapplication.user.database.databaseInterfaces.IOnStringValueFoundInDatabase;
-import com.ds.projecthelper.dialogs.ErrorDialog;
+import com.ds.messengerapplication.user.database.databaseInterfaces.IOnValueDataSnapshotFoundInDatabase;
+import com.google.firebase.database.DataSnapshot;
 
 import java.util.HashMap;
 

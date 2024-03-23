@@ -1,17 +1,17 @@
 package com.ds.messengerapplication.user.database;
 
-import static com.ds.projecthelper.Constants.USER_ID_PREFIX;
+import static com.ds.messengerapplication.Constants.USER_ID_PREFIX;
 
 import android.content.Context;
 
 import androidx.annotation.NonNull;
 
+import com.ds.messengerapplication.Constants;
+import com.ds.messengerapplication.dialogs.ErrorDialog;
 import com.ds.messengerapplication.user.User;
 import com.ds.messengerapplication.user.UserAdditionalInfo;
 import com.ds.messengerapplication.user.database.databaseInterfaces.IOnValueDataSnapshotFoundInDatabase;
 import com.ds.messengerapplication.util.Utils;
-import com.ds.projecthelper.Constants;
-import com.ds.projecthelper.dialogs.ErrorDialog;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -74,7 +74,6 @@ public class Database {
             addRecord(reference, Constants.USER_USE_SCROLL_BARS_REFERENCE_PATH, userAdditionalInfo.isUseScrollBars(), context);
             addRecord(reference, Constants.USER_USE_SOUNDS_REFERENCE_PATH, userAdditionalInfo.isUseSounds(), context);
             addRecord(reference, Constants.USER_THEME_REFERENCE_PATH, userAdditionalInfo.getTheme(), context);
-            addRecord(reference, Constants.USER_USING_PLS_REFERENCE_PATH, userAdditionalInfo.getUsingPLs(), context);
             addRecord(reference, Constants.USER_DATE_OF_REGISTRATION_REFERENCE_PATH, userAdditionalInfo.getDateOfRegistration(), context);
         }catch (Exception e){
             ErrorDialog.showDialog(context, e, true);
@@ -111,17 +110,20 @@ public class Database {
     }
 
     public static void findDataSnapshotByKey(Context context, String key, String userId, IOnValueDataSnapshotFoundInDatabase iOnValueDataSnapshotFoundInDatabase){
-        Task<DataSnapshot> rootDataSnapshot = getDatabaseReference().child(USER_ID_PREFIX + userId).get();
-        rootDataSnapshot.addOnCompleteListener(task -> {
-            Utils.checkIsTaskIsNotSuccessfulOrCanceled(task, context);
+        try {
+            Task<DataSnapshot> rootDataSnapshot = getDatabaseReference().child(USER_ID_PREFIX + userId).get();
+            rootDataSnapshot.addOnCompleteListener(task -> {
+                Utils.checkIsTaskIsNotSuccessfulOrCanceled(task, context);
 
-            if(task.isSuccessful()){
-                task.getResult().getChildren().forEach(dataSnapshot -> dataSnapshot.getChildren().forEach(dataSnapshot1 -> {
-                    if(Objects.equals(dataSnapshot1.getKey(), key)) {
-                        iOnValueDataSnapshotFoundInDatabase.onValueFound(dataSnapshot1);
-                    }
-                }));
-            }
-        });
+                if (task.isSuccessful()) {
+                    task.getResult().getChildren().forEach(dataSnapshot -> dataSnapshot.getChildren().forEach(dataSnapshot1 -> {
+                        if (Objects.equals(dataSnapshot1.getKey(), key)) iOnValueDataSnapshotFoundInDatabase.onValueFound(dataSnapshot1); else iOnValueDataSnapshotFoundInDatabase.onFailed();
+                    }));
+                }
+            });
+        }catch (Exception e){
+            ErrorDialog.showDialog(context, e, true);
+            iOnValueDataSnapshotFoundInDatabase.onFailed();
+        }
     }
 }

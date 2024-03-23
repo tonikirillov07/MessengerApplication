@@ -73,4 +73,5 @@
     <string name="registered_at">Дата регистрации</string>
     <string name="set_offline_status">Задать статус offline</string>
     <string name="set_online_status">Задать статус online</string>
+    <string name="conversations">Диалоги</string>
 </resources>
