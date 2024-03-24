@@ -124,14 +124,16 @@
                     android:layout_width="102dp"
                     android:layout_height="102dp"
                     android:layout_gravity="center"
+                    app:avatarViewShape="circle"
                     android:layout_margin="15dp"
                     android:adjustViewBounds="true"
                     android:elevation="10dp"
-                    android:scaleType="centerInside"
+                    android:scaleType="fitXY"
                     app:avatarViewIndicatorBorderColor="@color/white"
                     app:avatarViewIndicatorColor="@color/green"
                     app:avatarViewIndicatorEnabled="true"
                     app:avatarViewIndicatorPosition="bottomRight"
+                    app:avatarViewMaxSectionSize="two"
                     app:srcCompat="@drawable/avatar" />
 
                 <LinearLayout

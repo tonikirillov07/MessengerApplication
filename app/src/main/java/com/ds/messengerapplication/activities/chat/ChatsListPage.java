@@ -1,7 +1,11 @@
 package com.ds.messengerapplication.activities.chat;
 
+import static com.ds.messengerapplication.chatElement.ChatItem.createChatItem;
+
 import android.os.Bundle;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +16,7 @@ import com.ds.messengerapplication.util.Utils;
 
 public class ChatsListPage extends AppCompatActivity {
     private ImageButton settingsButton, addChatButton;
+    private LinearLayout scrollViewContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,8 +25,32 @@ public class ChatsListPage extends AppCompatActivity {
 
         settingsButton = findViewById(R.id.chatSettingsButton);
         addChatButton = findViewById(R.id.addChatButton);
+        scrollViewContent = findViewById(R.id.scrollViewContent);
 
         initButtons();
+        initChatsList();
+    }
+
+    private void initChatsList() {
+        new Thread(() -> {
+            for (int i = 1; i < 21; i++) {
+                int finalI = i;
+                runOnUiThread(() -> {
+                    LinearLayout chatItem = createChatItem("Strange man " + finalI, "I'm waiting for you", this, () -> {
+                        Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
+                    });
+
+                    scrollViewContent.addView(chatItem);
+                });
+
+                try {
+                    Thread.sleep(150);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }).start();
+
     }
 
     private void initButtons() {
@@ -35,4 +64,6 @@ public class ChatsListPage extends AppCompatActivity {
             Utils.addRotateAnimation(addChatButton, 0, 360);
         }));
     }
+
+
 }

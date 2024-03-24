@@ -3,6 +3,7 @@ package com.ds.messengerapplication.util;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -130,5 +131,12 @@ public abstract class Utils extends Constants {
         if(!task.isSuccessful() | task.isCanceled()){
             ErrorDialog.showDialog(context, Objects.requireNonNull(task.getException()), true);
         }
+    }
+
+    public static int convertDpToPx(int dpValue, @NonNull Context context){
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        int dpi = metrics.densityDpi;
+
+        return dpValue * (dpi / 160);
     }
 }

@@ -3,6 +3,9 @@ package com.ds.messengerapplication.activities.settings;
 import static com.ds.messengerapplication.util.Utils.failedInExecutingTask;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.graphics.drawable.Icon;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -10,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ds.messengerapplication.R;
@@ -27,6 +31,7 @@ public class MainSettingsPage extends AppCompatActivity {
     private TextView userMailText, dateOfRegistrationText, goToUserSettings;
     private AvatarView avatarView;
     private LinearLayout sendFeedbackButton, resetSettingsButton, appearanceButton, aboutButton, moreButton;
+    private static final int PICK_IMAGE_REQUEST = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +53,28 @@ public class MainSettingsPage extends AppCompatActivity {
             initButtons(this);
             initSearch(getResources().getStringArray(R.array.search_requests));
             loadUserData();
+            initAvatarView();
         }catch (Exception e){
             ErrorDialog.showDialog(this, e, true);
+        }
+    }
+
+    private void initAvatarView() {
+        avatarView.setOnClickListener(click -> {
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.setType("image/*");
+            startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            Uri imageUri = data.getData();
+
+            avatarView.setImageIcon(Icon.createWithContentUri(imageUri));
         }
     }
 
