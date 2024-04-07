@@ -16,7 +16,10 @@ import androidx.core.content.ContextCompat;
 import com.ds.messengerapplication.R;
 import com.ds.messengerapplication.dialogs.ErrorDialog;
 import com.ds.messengerapplication.util.IOnAction;
+import com.ds.messengerapplication.util.IOnActionWithParameter;
 import com.ds.messengerapplication.util.Utils;
+import com.ds.messengerapplication.util.sounds.SoundPlayer;
+import com.ds.messengerapplication.util.sounds.SoundsConstants;
 
 import io.getstream.avatarview.AvatarShape;
 import io.getstream.avatarview.AvatarView;
@@ -24,7 +27,7 @@ import io.getstream.avatarview.IndicatorPosition;
 
 public abstract class ChatItem {
     @Nullable
-    public static LinearLayout createChatItem(String name, String message, Context context, IOnAction onAction){
+    public static LinearLayout createChatItem(String name, String message, Context context, IOnActionWithParameter onAction){
         try {
             LinearLayout itemLayout = new LinearLayout(context);
             itemLayout.setOrientation(LinearLayout.HORIZONTAL);
@@ -33,7 +36,12 @@ public abstract class ChatItem {
             itemLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, Utils.convertDpToPx(84, context)){{
                 setMargins(Utils.convertDpToPx(20, context), Utils.convertDpToPx(15, context), Utils.convertDpToPx(20, context), 0);
             }});
-            itemLayout.setOnClickListener(click -> Utils.onDefaultButtonClick(itemLayout, onAction));
+            itemLayout.setOnClickListener(click -> {
+                SoundPlayer.create(context, SoundsConstants.CLICK_SOUND_PATH, true);
+                Utils.addAlphaAnimation(itemLayout, 0.5f, 1f);
+
+                onAction.onAction(name);
+            });
 
             createAvatarView(itemLayout, context);
 
@@ -48,12 +56,10 @@ public abstract class ChatItem {
             return itemLayout;
         }catch (Exception e){
             ErrorDialog.showDialog(context, e, true);
-            onAction.onFailed();
         }
 
         return null;
     }
-
 
     @Nullable
     private static LinearLayout createNameAndLastMessageLinearLayout(LinearLayout itemLayout, Context context) {
@@ -87,8 +93,8 @@ public abstract class ChatItem {
     private static void createNameTextView(String name, Context context, @NonNull LinearLayout nameAndMessageLayout) {
         try {
             TextView nameTextView = createChatItemTextView(name, 16, context);
-
             assert nameTextView != null;
+
             nameTextView.getPaint().setUnderlineText(true);
             nameTextView.setGravity(CENTER_VERTICAL);
             nameTextView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT) {{

@@ -3,6 +3,7 @@ package com.ds.messengerapplication.user.database;
 import static com.ds.messengerapplication.Constants.USER_ID_PREFIX;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -14,13 +15,9 @@ import com.ds.messengerapplication.user.database.databaseInterfaces.IOnValueData
 import com.ds.messengerapplication.util.Utils;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class Database {
@@ -82,31 +79,16 @@ public class Database {
 
     private static void addRecord(DatabaseReference databaseReference, String referencePath, Object value, Context context){
         try {
-            databaseReference.child(referencePath).push().setValue(value.toString());
+            databaseReference.child(referencePath).push().setValue(value.toString()).addOnCompleteListener(task -> {
+                if(task.isSuccessful()){
+                    Log.i(Database.class.getName(), "Added record " + referencePath + " with value : " + value);
+                }else{
+                    Log.e(Database.class.getName(), "Failed to add record " + referencePath + " with value : " + value + ". Exception: " + task.getException());
+                }
+            });
         }catch (Exception e){
             ErrorDialog.showDialog(context, e, true);
         }
-    }
-
-    @NonNull
-    public static List<Object> allRecords(){
-        List<Object> allRecords = new ArrayList<>();
-
-        getDatabaseReference().addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                snapshot.getChildren().forEach(dataSnapshot -> {
-                    allRecords.add(dataSnapshot.getValue());
-                });
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        return allRecords;
     }
 
     public static void findDataSnapshotByKey(Context context, String key, String userId, IOnValueDataSnapshotFoundInDatabase iOnValueDataSnapshotFoundInDatabase){

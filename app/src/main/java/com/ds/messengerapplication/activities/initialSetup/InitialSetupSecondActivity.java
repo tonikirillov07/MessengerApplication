@@ -28,6 +28,8 @@ import com.ds.messengerapplication.util.AnotherActivity;
 import com.ds.messengerapplication.util.EditTextChecker;
 import com.ds.messengerapplication.util.IOnAction;
 import com.ds.messengerapplication.util.Utils;
+import com.ds.messengerapplication.util.sounds.SoundPlayer;
+import com.ds.messengerapplication.util.sounds.SoundsConstants;
 
 public class InitialSetupSecondActivity extends AppCompatActivity {
     private Button buttonNext;
@@ -50,7 +52,11 @@ public class InitialSetupSecondActivity extends AppCompatActivity {
 
             buttonNext.setOnClickListener(v -> onNextButtonAction(this));
             iHaveAccount.setOnClickListener(v -> onHaveAccountButtonAction());
-            iForgotMyPassword.setOnClickListener(v -> AnotherActivity.gotoAnotherActivity(this, RestorePasswordActivity.class, false));
+            iForgotMyPassword.setOnClickListener(v -> {
+                SoundPlayer.create(this, SoundsConstants.CLICK_SOUND_PATH, false);
+
+                AnotherActivity.gotoAnotherActivity(this, RestorePasswordActivity.class, false);
+            });
 
             addTextFieldsTextChangeListener(loginField);
             addTextFieldsTextChangeListener(passwordField);
@@ -61,6 +67,8 @@ public class InitialSetupSecondActivity extends AppCompatActivity {
 
     private void onNextButtonAction(AppCompatActivity activity){
         try {
+            SoundPlayer.create(this, SoundsConstants.CLICK_SOUND_PATH, false);
+
             buttonNext.setEnabled(false);
 
             if (checkForEnteredData()) {
@@ -101,6 +109,8 @@ public class InitialSetupSecondActivity extends AppCompatActivity {
 
     private void onHaveAccountButtonAction(){
         try {
+            SoundPlayer.create(this, SoundsConstants.CLICK_SOUND_PATH, false);
+
             iHaveAccount.setText(!logInIsOpen ? getResources().getString(R.string.i_have_not_account) : getResources().getString(R.string.i_have_account));
             iForgotMyPassword.setVisibility(!logInIsOpen ? View.VISIBLE : View.INVISIBLE);
             title.setText(!logInIsOpen ? getResources().getString(R.string.well_lets_log_in) : getResources().getString(R.string.first_let_s_create_account));

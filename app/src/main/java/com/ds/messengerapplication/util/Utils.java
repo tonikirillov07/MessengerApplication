@@ -2,7 +2,6 @@ package com.ds.messengerapplication.util;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.os.Build;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -21,37 +20,22 @@ import com.ds.messengerapplication.R;
 import com.ds.messengerapplication.dialogs.ErrorDialog;
 import com.ds.messengerapplication.user.UserController;
 import com.ds.messengerapplication.user.database.databaseGetterAndSetter.DatabaseValuesGetter;
-import com.ds.messengerapplication.user.database.databaseInterfaces.IOnStringValueFoundInDatabase;
+import com.ds.messengerapplication.util.sounds.SoundPlayer;
+import com.ds.messengerapplication.util.sounds.SoundsConstants;
 import com.google.android.gms.tasks.Task;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Base64;
+import java.time.LocalTime;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
-import java.util.Random;
 
 import io.getstream.avatarview.AvatarView;
 
 public abstract class Utils extends Constants {
-    @Nullable
-    public static byte[] createRandomPassword(){
-        String characters = "1234567890QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklmnbvcxz=-/()|";
-        StringBuilder stringBuilder = new StringBuilder();
-
-        for (int i = 0; i < DEFAULT_PASSWORD_LENGTH; i++) {
-            stringBuilder.append(characters.toCharArray()[new Random().nextInt(characters.length())]);
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            return Base64.getEncoder().encode(stringBuilder.toString().getBytes());
-        }
-
-        return null;
-    }
-
     public static void clearEditText(@NonNull EditText editText){
         editText.getText().clear();
     }
@@ -62,6 +46,8 @@ public abstract class Utils extends Constants {
             rotateAnimation.setRepeatMode(Animation.REVERSE);
             rotateAnimation.setDuration(200);
             view.startAnimation(rotateAnimation);
+
+            Log.i(Utils.class.getName(), "Player rotate animation for " + view + ". From angle/To angle: " + fromAngle + "/" + toAngle);
         }catch (Exception e){
             ErrorDialog.showDialog(view.getContext(), e, true);
         }
@@ -73,6 +59,8 @@ public abstract class Utils extends Constants {
             translateAnimation.setDuration(DEFAULT_ANIMATION_TIME_IN_MILLIS * 2);
             translateAnimation.setRepeatMode(Animation.REVERSE);
             view.startAnimation(translateAnimation);
+
+            Log.i(Utils.class.getName(), "Player translate animation for " + view + ". By up: " + byUp);
         }catch (Exception e){
             ErrorDialog.showDialog(view.getContext(), e, true);
         }
@@ -84,6 +72,8 @@ public abstract class Utils extends Constants {
             alphaAnimation.setRepeatMode(Animation.REVERSE);
             alphaAnimation.setDuration(DEFAULT_ANIMATION_TIME_IN_MILLIS);
             view.startAnimation(alphaAnimation);
+
+            Log.i(Utils.class.getName(), "Player alpha animation for " + view + ". From/To: " + fromAlpha + "/" + toAlpha);
         }catch (Exception e){
             ErrorDialog.showDialog(view.getContext(), e, true);
         }
@@ -91,6 +81,8 @@ public abstract class Utils extends Constants {
 
    public static void onDefaultButtonClick(View view, @NonNull IOnAction onAction){
         try {
+            SoundPlayer.create(view.getContext(), SoundsConstants.CLICK_SOUND_PATH, true);
+
             Utils.addAlphaAnimation(view, 0.5f, 1);
 
             onAction.onAction();
@@ -134,9 +126,29 @@ public abstract class Utils extends Constants {
     }
 
     public static int convertDpToPx(int dpValue, @NonNull Context context){
-        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-        int dpi = metrics.densityDpi;
+        try {
+            DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+            int dpi = metrics.densityDpi;
 
-        return dpValue * (dpi / 160);
+            return dpValue * (dpi / 160);
+        }catch (Exception e){
+            ErrorDialog.showDialog(context, e, true);
+        }
+
+        return 0;
+    }
+
+    @Nullable
+    public static String getCurrentTime(){
+        try {
+            DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss", Locale.US);
+            Date date = new Date();
+
+            return dateFormat.format(date);
+        }catch (Exception e){
+            Log.e(Utils.class.getName(), e.toString());
+        }
+
+        return null;
     }
 }

@@ -27,12 +27,14 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }
 
 dependencies {
+    annotationProcessor("org.projectlombok:lombok:1.18.32")
+
     implementation("org.json:json:20240303")
     implementation("com.google.firebase:firebase-database:20.3.1")
     implementation(platform("com.google.firebase:firebase-bom:32.8.0"))

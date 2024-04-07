@@ -17,6 +17,8 @@ import com.ds.messengerapplication.user.UserController;
 import com.ds.messengerapplication.util.AnotherActivity;
 import com.ds.messengerapplication.util.ControlsBar;
 import com.ds.messengerapplication.util.Utils;
+import com.ds.messengerapplication.util.sounds.SoundPlayer;
+import com.ds.messengerapplication.util.sounds.SoundsConstants;
 
 import java.util.Objects;
 
@@ -81,9 +83,15 @@ public class MainSettingsUserBlock extends AppCompatActivity {
                 }
             }));
 
-            backButton.setOnClickListener(click -> AnotherActivity.gotoAnotherActivity(this, MainSettingsPage.class, false));
+            backButton.setOnClickListener(click -> {
+                SoundPlayer.create(this, SoundsConstants.CLICK_SOUND_PATH, true);
+
+                AnotherActivity.gotoAnotherActivity(this, MainSettingsPage.class, false);
+            });
             switchStatus.setOnClickListener(click -> switchStatus());
-            changeEmailButton.setOnClickListener(click -> {});
+            changeEmailButton.setOnClickListener(click -> {
+                SoundPlayer.create(this, SoundsConstants.CLICK_SOUND_PATH, true);
+            });
 
             ControlsBar.initActions(this, findViewById(R.id.mainButton), findViewById(R.id.messengerButton));
         }catch (Exception e){
@@ -97,6 +105,8 @@ public class MainSettingsUserBlock extends AppCompatActivity {
     }
 
     private void switchStatus(){
+        SoundPlayer.create(this, SoundsConstants.CLICK_SOUND_PATH, true);
+
         isOnline = !isOnline;
 
         avatarView.setIndicatorColor(isOnline ? Constants.ONLINE_STATUS_COLOR: Constants.OFFLINE_STATUS_COLOR);

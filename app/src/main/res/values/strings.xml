@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name" translatable="false">Messenger</string>
+    <string name="app_current_version" translatable="false">1.0</string>
+    <string name="app_current_build" translatable="false">26M24</string>
+    <string name="app_developer_name" translatable="false">Darkness</string>
+
     <string name="next">Next</string>
     <string name="welcome_text">Welcome! This app can help you to communicate with your needed people! Press Next button to pass the initial setup phase</string>
     <string name="first_let_s_create_account">First, let\'s create account</string>
@@ -80,10 +84,13 @@
     <string name="set_offline_status">Set offline status</string>
     <string name="set_online_status">Set online status</string>
     <string name="conversations">Conversations</string>
+    <string name="settings_reset_confirm">Do you really want to reset you settings?</string>
 
     <string name="main_page_image_button_tag" translatable="false">Main Page</string>
     <string name="chat_page_image_button_tag" translatable="false">Chat Page</string>
     <string name="light_theme_radio_button_tag" translatable="false">Light Theme</string>
     <string name="dark_theme_radio_button_tag" translatable="false">Dark Theme</string>
     <string name="as_in_system_theme_radio_button_tag" translatable="false">As In System Theme</string>
+
+    <string name="your_message">Your message</string>
 </resources>

@@ -2,9 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission
+        android:name="android.permission.WRITE_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
 
     <application
         android:allowBackup="true"
@@ -16,6 +21,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MessengerApplication"
         tools:targetApi="31">
+        <activity
+            android:name=".activities.chat.ChatView"
+            android:exported="false" />
         <activity
             android:name=".activities.chat.ChatsListPage"
             android:exported="false" />
@@ -29,14 +37,30 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.initialSetup.InitialSetupSecondActivity" />
-        <activity android:name=".activities.settings.MainSettingsPage" />
-        <activity android:name=".activities.settings.MainSettingsUserBlock" />
-        <activity android:name=".activities.settings.AboutSettingsBlock" />
-        <activity android:name=".activities.settings.AppearanceSettingsBlock" />
-        <activity android:name=".activities.settings.FeedbacksBlock" />
-        <activity android:name=".activities.ThanksForFeedbackActivity" />
-        <activity android:name=".activities.services.RestorePasswordActivity" />
+        <activity
+            android:name=".activities.initialSetup.InitialSetupSecondActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".activities.settings.MainSettingsPage"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".activities.settings.MainSettingsUserBlock"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".activities.settings.AboutSettingsBlock"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".activities.settings.AppearanceSettingsBlock"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".activities.settings.FeedbacksBlock"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".activities.ThanksForFeedbackActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".activities.services.RestorePasswordActivity"
+            android:configChanges="orientation|screenSize" />
 
         <meta-data
             android:name="preloaded_fonts"

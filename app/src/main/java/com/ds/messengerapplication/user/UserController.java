@@ -5,15 +5,16 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.ds.messengerapplication.Constants;
 import com.ds.messengerapplication.dialogs.ErrorDialog;
+import com.ds.messengerapplication.user.database.databaseGetterAndSetter.DatabaseValueSetter;
 import com.ds.messengerapplication.util.IOnAction;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
 
-public class UserController {
+public class UserController extends Constants {
     private final FirebaseAuth firebaseAuth;
     private static UserController instance = null;
 
@@ -62,6 +63,21 @@ public class UserController {
                 });
             }
         });
+    }
+
+    public static void resetSettings(Context context){
+        try{
+            UserAdditionalInfo userAdditionalInfo = UserAdditionalInfo.getWithDefaultValues();
+
+            DatabaseValueSetter.changeValue(USER_CONTRAST_REFERENCE_PATH, String.valueOf(userAdditionalInfo.getContrast()), getUserId(), context);
+            DatabaseValueSetter.changeValue(USER_BRIGHTNESS_REFERENCE_PATH, String.valueOf(userAdditionalInfo.getBrightness()), getUserId(), context);
+            DatabaseValueSetter.changeValue(USER_SATURATION_REFERENCE_PATH, String.valueOf(userAdditionalInfo.getSaturation()), getUserId(), context);
+            DatabaseValueSetter.changeValue(USER_THEME_REFERENCE_PATH, String.valueOf(userAdditionalInfo.getTheme()), getUserId(), context);
+            DatabaseValueSetter.changeValue(USER_USE_SOUNDS_REFERENCE_PATH, String.valueOf(userAdditionalInfo.isUseSounds()), getUserId(), context);
+            DatabaseValueSetter.changeValue(USER_USE_SCROLL_BARS_REFERENCE_PATH, String.valueOf(userAdditionalInfo.isUseScrollBars()), getUserId(), context);
+        }catch (Exception e){
+            ErrorDialog.showDialog(context, e, true);
+        }
     }
 
     public static void logIn(String email, String password, IOnAction onAction, Context context){

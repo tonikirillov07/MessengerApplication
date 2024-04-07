@@ -24,7 +24,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/pageTitle"
+            android:id="@+id/userNameText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"

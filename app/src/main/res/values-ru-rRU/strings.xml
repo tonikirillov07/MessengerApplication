@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="next">Далее</string>
-    <string name="welcome_text">Добро пожаловать! Это приложение поможет тебе коммуницировать с ецжными людьми. Нажмите \"Далее\" для прохождения первоначального этапа настройки</string>
+    <string name="welcome_text">Добро пожаловать! Это приложение поможет тебе коммуницировать с нужными людьми. Нажмите \"Далее\" для прохождения первоначального этапа настройки</string>
     <string name="first_let_s_create_account">Для начала, давайте создадим аккаунт</string>
     <string name="enter_your_login_or_email">Ваш Email</string>
     <string name="your_password">Ваш пароль</string>
@@ -35,8 +35,8 @@
     <string name="explain_it">Распишите его</string>
     <string name="back">Назад</string>
     <string name="you_can_rate_this_app">Вы можете оценить это приложение</string>
-    <string name="rate">Отценить</string>
-    <string name="we_re_thank_you_for_your_feedback">Мы благодарим вас за ваш отзыв</string>
+    <string name="rate">Оценить</string>
+    <string name="we_re_thank_you_for_your_feedback">Мы благодарим Вас за Ваш отзыв</string>
     <string name="account">Аккаунт</string>
     <string name="change_email">Изменить Email</string>
     <string name="select_action">Выберете действие</string>
@@ -74,4 +74,6 @@
     <string name="set_offline_status">Задать статус offline</string>
     <string name="set_online_status">Задать статус online</string>
     <string name="conversations">Диалоги</string>
+    <string name="your_message">Ваше сообщение</string>
+    <string name="settings_reset_confirm">Вы действительно хотите сбросить ваши настройки?</string>
 </resources>

@@ -14,7 +14,6 @@ import com.ds.messengerapplication.dialogs.ErrorDialog;
 import com.ds.messengerapplication.user.UserController;
 import com.ds.messengerapplication.user.database.databaseGetterAndSetter.DatabaseValueSetter;
 import com.ds.messengerapplication.user.database.databaseGetterAndSetter.DatabaseValuesGetter;
-import com.ds.messengerapplication.user.database.databaseInterfaces.IOnStringValueFoundInDatabase;
 import com.ds.messengerapplication.util.ControlsBar;
 import com.ds.messengerapplication.util.Utils;
 import com.ds.messengerapplication.util.settings.SettingsActivitiesUtils;

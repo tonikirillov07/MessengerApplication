@@ -1,0 +1,7 @@
+<shape xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle"
+    tools:ignore="MissingDefaultResource">
+    <solid
+        android:color="@color/chat_item_color"
+        />
+</shape>

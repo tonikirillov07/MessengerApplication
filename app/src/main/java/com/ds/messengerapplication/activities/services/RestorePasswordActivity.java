@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.ds.messengerapplication.R;
 import com.ds.messengerapplication.dialogs.ErrorDialog;
 import com.ds.messengerapplication.util.EditTextChecker;
+import com.ds.messengerapplication.util.sounds.SoundPlayer;
+import com.ds.messengerapplication.util.sounds.SoundsConstants;
 
 public class RestorePasswordActivity extends AppCompatActivity {
     private EditText mailTextField;
@@ -39,6 +41,8 @@ public class RestorePasswordActivity extends AppCompatActivity {
     }
 
     private void onRestoreWithEmailButtonClick(){
+        SoundPlayer.create(this, SoundsConstants.CLICK_SOUND_PATH, true);
+
         if(EditTextChecker.checkField(mailTextField, MIN_EMAIL_LENGTH)) {
             Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
         }else EditTextChecker.checkField(mailTextField, "email", MIN_EMAIL_LENGTH);

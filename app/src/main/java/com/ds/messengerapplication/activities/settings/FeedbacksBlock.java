@@ -1,6 +1,9 @@
 package com.ds.messengerapplication.activities.settings;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -14,6 +17,8 @@ import com.ds.messengerapplication.dialogs.ErrorDialog;
 import com.ds.messengerapplication.util.AnotherActivity;
 import com.ds.messengerapplication.util.ControlsBar;
 import com.ds.messengerapplication.util.settings.SettingsActivitiesUtils;
+import com.ds.messengerapplication.util.sounds.SoundPlayer;
+import com.ds.messengerapplication.util.sounds.SoundsConstants;
 import com.google.android.material.slider.Slider;
 
 public class FeedbacksBlock extends AppCompatActivity {
@@ -57,8 +62,11 @@ public class FeedbacksBlock extends AppCompatActivity {
 
     private void sendFeedbackButtonAction(){
         try {
+            SoundPlayer.create(this, SoundsConstants.CLICK_SOUND_PATH, true);
+
             if (!checkFeedback()) return;
 
+            sendEmail();
             AnotherActivity.gotoAnotherActivity(this, ThanksForFeedbackActivity.class, false);
 
             summarizeFeedbackTextField.getText().clear();
@@ -97,7 +105,32 @@ public class FeedbacksBlock extends AppCompatActivity {
     }
 
     private void onRateButton(){
+        SoundPlayer.create(this, SoundsConstants.CLICK_SOUND_PATH, true);
+
         if(isSliderRateWasInteract) AnotherActivity.gotoAnotherActivity(this, ThanksForFeedbackActivity.class, false);
         else ErrorDialog.showDialog(this, new Exception(getResources().getString(R.string.rate_this_app_using_slider)), false);
+    }
+
+    protected void sendEmail() {
+        try {
+            Log.i("Send email", "");
+
+            String[] TO = {"toni.kirillov.07@inbox.ru"};
+            String[] CC = {"xyz@gmail.com"};
+            Intent emailIntent = new Intent(Intent.ACTION_SEND);
+            emailIntent.setDataAndType(Uri.parse("mailto:"), "text/plain");
+
+            emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+            emailIntent.putExtra(Intent.EXTRA_CC, CC);
+            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Your subject");
+            emailIntent.putExtra(Intent.EXTRA_TEXT, "Email message goes here");
+
+            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+            finish();
+            Log.i("Finished sending email...", "");
+        }catch (Exception e){
+            ErrorDialog.showDialog(this, e, true);
+        }
+
     }
 }

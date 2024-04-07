@@ -49,7 +49,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/pageTitle"
+            android:id="@+id/userNameText"
             tools:ignore="RtlSymmetry"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

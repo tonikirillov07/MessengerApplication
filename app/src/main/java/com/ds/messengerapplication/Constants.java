@@ -25,4 +25,5 @@ public abstract class Constants {
     public static final String USER_USE_SCROLL_BARS_REFERENCE_PATH = "user_use_scroll_bars";
     public static final String USER_DATE_OF_REGISTRATION_REFERENCE_PATH = "user_date_of_registration";
     public static final String TEMP_PASSWORD_STORE_EXTRA_KEY = "password";
+    public static final String SENDER_NAME_STORE_EXTRA_KEY = "sender";
 }
