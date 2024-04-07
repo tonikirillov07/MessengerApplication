@@ -4,7 +4,7 @@ import android.content.Context;
 
 import androidx.appcompat.app.AlertDialog;
 
-import com.ds.messengerapplication.util.IOnAction;
+import com.ds.messengerapplication.util.interfaces.IOnAction;
 
 public final class ConfirmDialog {
     public static void showDialog(Context context, String message, IOnAction onPositiveAction, int iconId){

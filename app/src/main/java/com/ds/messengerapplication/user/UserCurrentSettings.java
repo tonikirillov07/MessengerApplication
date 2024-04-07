@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.ds.messengerapplication.Constants;
 import com.ds.messengerapplication.user.database.databaseGetterAndSetter.DatabaseValuesGetter;
-import com.ds.messengerapplication.util.IOnActionWithParameter;
+import com.ds.messengerapplication.util.interfaces.IOnActionWithParameter;
 
 public class UserCurrentSettings extends Constants {
     public static void onSoundsEnabled(Context context, IOnActionWithParameter onActionWithParameter){

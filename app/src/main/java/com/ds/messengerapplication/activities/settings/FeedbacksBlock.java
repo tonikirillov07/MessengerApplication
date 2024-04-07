@@ -113,12 +113,12 @@ public class FeedbacksBlock extends AppCompatActivity {
 
     protected void sendEmail() {
         try {
-            Log.i("Send email", "");
+            Log.i("SENDING_EMAIL", "Send email");
 
-            String[] TO = {"toni.kirillov.07@inbox.ru"};
-            String[] CC = {"xyz@gmail.com"};
+            String[] TO = {"testmailjava43@gmail.com"};
+            String[] CC = {"testmailjava43@gmail.com"};
             Intent emailIntent = new Intent(Intent.ACTION_SEND);
-            emailIntent.setDataAndType(Uri.parse("mailto:"), "text/plain");
+            emailIntent.setDataAndType(Uri.parse("mailto:"), "message/rfc822");
 
             emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
             emailIntent.putExtra(Intent.EXTRA_CC, CC);
@@ -127,7 +127,7 @@ public class FeedbacksBlock extends AppCompatActivity {
 
             startActivity(Intent.createChooser(emailIntent, "Send mail..."));
             finish();
-            Log.i("Finished sending email...", "");
+            Log.i("SENDING_EMAIL", "Finished sending email...");
         }catch (Exception e){
             ErrorDialog.showDialog(this, e, true);
         }

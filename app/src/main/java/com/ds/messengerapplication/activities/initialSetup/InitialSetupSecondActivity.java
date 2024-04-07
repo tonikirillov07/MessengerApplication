@@ -2,9 +2,8 @@ package com.ds.messengerapplication.activities.initialSetup;
 
 import static com.ds.messengerapplication.Constants.MIN_LOGIN_LENGTH;
 import static com.ds.messengerapplication.Constants.MIN_PASSWORD_LENGTH;
-import static com.ds.messengerapplication.Constants.TEMP_PASSWORD_STORE_EXTRA_KEY;
 
-import android.content.Intent;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -20,13 +19,14 @@ import com.ds.messengerapplication.R;
 import com.ds.messengerapplication.activities.chat.ChatsListPage;
 import com.ds.messengerapplication.activities.services.RestorePasswordActivity;
 import com.ds.messengerapplication.dialogs.ErrorDialog;
+import com.ds.messengerapplication.dialogs.LoadingDialog;
 import com.ds.messengerapplication.user.User;
 import com.ds.messengerapplication.user.UserAdditionalInfo;
 import com.ds.messengerapplication.user.UserController;
 import com.ds.messengerapplication.user.database.Database;
 import com.ds.messengerapplication.util.AnotherActivity;
 import com.ds.messengerapplication.util.EditTextChecker;
-import com.ds.messengerapplication.util.IOnAction;
+import com.ds.messengerapplication.util.interfaces.IOnAction;
 import com.ds.messengerapplication.util.Utils;
 import com.ds.messengerapplication.util.sounds.SoundPlayer;
 import com.ds.messengerapplication.util.sounds.SoundsConstants;
@@ -65,40 +65,51 @@ public class InitialSetupSecondActivity extends AppCompatActivity {
         }
     }
 
+    private void dismissProgressDialogAndButtonEnabled(@NonNull ProgressDialog progressDialog){
+        try {
+            progressDialog.dismiss();
+            buttonNext.setEnabled(true);
+        }catch (Exception e){
+            ErrorDialog.showDialog(this, e, true);
+        }
+    }
+
     private void onNextButtonAction(AppCompatActivity activity){
         try {
             SoundPlayer.create(this, SoundsConstants.CLICK_SOUND_PATH, false);
 
-            buttonNext.setEnabled(false);
-
             if (checkForEnteredData()) {
+                buttonNext.setEnabled(false);
+                ProgressDialog progressDialog = new LoadingDialog(this, getString(R.string.wait_for_it));
+                progressDialog.show();
+
                 if(!logInIsOpen) {
                     UserController.createUser(getLoginText(), getPasswordText(), new IOnAction() {
                         @Override
                         public void onAction() {
                             Database.writeNewUser(new User(getLoginText(), getPasswordText()), UserAdditionalInfo.getWithDefaultValues(), activity);
                             AnotherActivity.gotoAnotherActivity(activity, ChatsListPage.class, true);
-                            buttonNext.setEnabled(true);
+
+                            dismissProgressDialogAndButtonEnabled(progressDialog);
                         }
 
                         @Override
-                        public void onFailed() {
-                            buttonNext.setEnabled(true);
-                        }
+                        public void onFailed() {dismissProgressDialogAndButtonEnabled(progressDialog);}
                     }, this);
                 }else
                     UserController.logIn(getLoginText(), getPasswordText(), new IOnAction() {
                         @Override
                         public void onAction() {
                             AnotherActivity.gotoAnotherActivity(activity, ChatsListPage.class, true);
-                            buttonNext.setEnabled(true);
+
+                            dismissProgressDialogAndButtonEnabled(progressDialog);
                         }
 
                         @Override
                         public void onFailed() {
                             IOnAction.super.onFailed();
 
-                            buttonNext.setEnabled(true);
+                            dismissProgressDialogAndButtonEnabled(progressDialog);
                         }
                     }, this);
             } else findErrorReason();
@@ -152,9 +163,7 @@ public class InitialSetupSecondActivity extends AppCompatActivity {
     private void addTextFieldsTextChangeListener(@NonNull EditText editText){
         editText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -162,9 +171,7 @@ public class InitialSetupSecondActivity extends AppCompatActivity {
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
-
-            }
+            public void afterTextChanged(Editable s) {}
         });
     }
 }

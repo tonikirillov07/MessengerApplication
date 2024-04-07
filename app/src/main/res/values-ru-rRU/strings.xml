@@ -44,7 +44,7 @@
     <string name="log_out_of_your_account">Выйти из аккаунта</string>
     <string name="delete_account">Удалить аккаунт</string>
     <string name="reset_settings">Сбросить настройки</string>
-    <string name="forgot_password_no_problem_follow_the_instruction">Забыли пароль? Не проблема! Просто следуйте инструкциям</string>
+    <string name="do_you_want_restore_password_no_problem_follow_the_instruction">Хотите восстановить пароль? Не проблема! Просто следуйте инструкциям</string>
     <string name="enter_your_email">Введите ваш Email</string>
     <string name="your_email">Ваш Email</string>
     <string name="changing_email">Смена Email</string>
@@ -70,10 +70,12 @@
     <string name="app_build">Сборка:</string>
     <string name="app_developer">Разработчик:</string>
     <string name="settings_app_name">Название:</string>
-    <string name="registered_at">Дата регистрации</string>
+    <string name="registered_at">Зарегистрирован</string>
     <string name="set_offline_status">Задать статус offline</string>
     <string name="set_online_status">Задать статус online</string>
     <string name="conversations">Диалоги</string>
+    <string name="wait_for_it">Подождите...</string>
     <string name="your_message">Ваше сообщение</string>
     <string name="settings_reset_confirm">Вы действительно хотите сбросить ваши настройки?</string>
+    <string name="or_enter_your_previous_password">Или введите ваш текущий пароль</string>
 </resources>

@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import com.ds.messengerapplication.Constants;
 import com.ds.messengerapplication.dialogs.ErrorDialog;
 import com.ds.messengerapplication.user.database.databaseGetterAndSetter.DatabaseValueSetter;
-import com.ds.messengerapplication.util.IOnAction;
+import com.ds.messengerapplication.util.interfaces.IOnAction;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 

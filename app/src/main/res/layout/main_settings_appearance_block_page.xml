@@ -119,243 +119,246 @@
         app:srcCompat="@drawable/get_back"
          />
 
-    <LinearLayout
-        android:id="@+id/colorSettingsLinearLayout"
-        android:layout_width="326dp"
-        android:layout_height="148dp"
-        android:layout_marginTop="28dp"
-        android:foreground="@drawable/rectangle_background"
-        android:orientation="vertical"
-        android:elevation="10dp"
+    <ScrollView
+        android:layout_width="408dp"
+        android:layout_height="610dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="15dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/montserrat_bold"
-                android:text="@string/contrast"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-
-            <com.google.android.material.slider.Slider
-                android:id="@+id/contrastSlider"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/contrast"
-                android:value="0"
-                app:thumbColor="@color/white"
-                app:trackColor="#083088"
-                app:trackHeight="8dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="15dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/montserrat_bold"
-                android:text="@string/brightness"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-
-            <com.google.android.material.slider.Slider
-                android:id="@+id/brightnessSlider"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/contrast"
-                android:value="0"
-                app:thumbColor="@color/white"
-                app:trackColor="#083088"
-                app:trackHeight="8dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView18"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="15dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/montserrat_bold"
-                android:text="@string/saturation"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-
-            <com.google.android.material.slider.Slider
-                android:id="@+id/saturationSlider"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/contrast"
-                android:value="0"
-                app:thumbColor="@color/white"
-                app:trackColor="#083088"
-                app:trackHeight="8dp" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/themeSettingsLinearLayout"
-        android:layout_width="326dp"
-        android:layout_height="139dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/rectangle_background"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:elevation="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.517"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/colorSettingsLinearLayout">
-
-        <RadioGroup
-            android:id="@+id/themesRadioGroup"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            tools:ignore="UselessParent">
+            android:orientation="vertical">
 
-            <RadioButton
-                android:id="@+id/lightThemeInThemesRadioGroupRadioButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#2C2C3C"
-                android:buttonTint="@color/white"
-                android:fontFamily="@font/montserrat_bold"
-                android:tag="@string/light_theme_radio_button_tag"
-                android:text="@string/light"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
+            <LinearLayout
+                android:id="@+id/colorSettingsLinearLayout"
+                android:layout_width="326dp"
+                android:layout_height="148dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="28dp"
+                android:elevation="10dp"
+                android:foreground="@drawable/rectangle_background"
+                android:orientation="vertical">
 
-            <RadioButton
-                android:id="@+id/darkThemeInThemesRadioGroupRadioButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#2C2C3C"
-                android:buttonTint="@color/white"
-                android:checked="true"
-                android:fontFamily="@font/montserrat_bold"
-                android:tag="@string/dark_theme_radio_button_tag"
-                android:text="@string/dark"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/asInSystemThemeInThemesRadioGroupRadioButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#2C2C3C"
-                android:buttonTint="@color/white"
-                android:fontFamily="@font/montserrat_bold"
-                android:tag="@string/as_in_system_theme_radio_button_tag"
-                android:text="@string/as_in_system"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
-        </RadioGroup>
+                    <TextView
+                        android:id="@+id/textView8"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="15dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="@string/contrast"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
 
-        <ImageView
-            android:id="@+id/imageView8"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:elevation="10dp"
-            android:layout_marginStart="80dp"
-            app:srcCompat="@drawable/theme"
-            tools:ignore="RtlHardcoded" />
+                    <com.google.android.material.slider.Slider
+                        android:id="@+id/contrastSlider"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/contrast"
+                        android:value="0"
+                        app:thumbColor="@color/white"
+                        app:trackColor="#083088"
+                        app:trackHeight="8dp" />
+                </LinearLayout>
 
-    </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal">
 
-    <LinearLayout
-        android:id="@+id/scrollBarSettingsLinearLayout"
-        android:layout_width="326dp"
-        android:layout_height="59dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/rectangle_background"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:elevation="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.517"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/themeSettingsLinearLayout">
+                    <TextView
+                        android:id="@+id/textView9"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="15dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="@string/brightness"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
 
-        <CheckBox
-            android:id="@+id/showScrollBarsCheckBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_weight="1"
-            android:backgroundTint="#2C2C3C"
-            android:buttonTint="@color/white"
-            android:fontFamily="@font/montserrat_bold"
-            android:text="@string/display_scroll_bars"
-            android:textColor="@color/white" />
+                    <com.google.android.material.slider.Slider
+                        android:id="@+id/brightnessSlider"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/contrast"
+                        android:value="0"
+                        app:thumbColor="@color/white"
+                        app:trackColor="#083088"
+                        app:trackHeight="8dp" />
+                </LinearLayout>
 
-        <ImageView
-            android:id="@+id/imageView9"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="15dp"
-            app:srcCompat="@drawable/scrollbar" />
-    </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal">
 
-    <LinearLayout
-        android:id="@+id/soundsSettingsLinearLayout"
-        android:layout_width="326dp"
-        android:layout_height="59dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/rectangle_background"
-        android:elevation="10dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.517"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollBarSettingsLinearLayout">
+                    <TextView
+                        android:id="@+id/textView18"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="15dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="@string/saturation"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
 
-        <CheckBox
-            android:id="@+id/useSoundsCheckBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_weight="1"
-            android:backgroundTint="#2C2C3C"
-            android:buttonTint="@color/white"
-            android:fontFamily="@font/montserrat_bold"
-            android:text="@string/use_sounds"
-            android:textColor="@color/white" />
+                    <com.google.android.material.slider.Slider
+                        android:id="@+id/saturationSlider"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/contrast"
+                        android:value="0"
+                        app:thumbColor="@color/white"
+                        app:trackColor="#083088"
+                        app:trackHeight="8dp" />
 
-        <ImageView
-            android:id="@+id/imageView10"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="15dp"
-            app:srcCompat="@drawable/sounds" />
-    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/themeSettingsLinearLayout"
+                android:layout_width="326dp"
+                android:layout_height="139dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/rectangle_background"
+                android:elevation="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <RadioGroup
+                    android:id="@+id/themesRadioGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    tools:ignore="UselessParent">
+
+                    <RadioButton
+                        android:id="@+id/lightThemeInThemesRadioGroupRadioButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#2C2C3C"
+                        android:buttonTint="@color/white"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:tag="@string/light_theme_radio_button_tag"
+                        android:text="@string/light"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <RadioButton
+                        android:id="@+id/darkThemeInThemesRadioGroupRadioButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#2C2C3C"
+                        android:buttonTint="@color/white"
+                        android:checked="true"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:tag="@string/dark_theme_radio_button_tag"
+                        android:text="@string/dark"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <RadioButton
+                        android:id="@+id/asInSystemThemeInThemesRadioGroupRadioButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#2C2C3C"
+                        android:buttonTint="@color/white"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:tag="@string/as_in_system_theme_radio_button_tag"
+                        android:text="@string/as_in_system"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+                </RadioGroup>
+
+                <ImageView
+                    android:id="@+id/imageView8"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="80dp"
+                    android:elevation="10dp"
+                    app:srcCompat="@drawable/theme"
+                    tools:ignore="RtlHardcoded" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/scrollBarSettingsLinearLayout"
+                android:layout_width="326dp"
+                android:layout_height="59dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/rectangle_background"
+                android:elevation="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/showScrollBarsCheckBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#2C2C3C"
+                    android:buttonTint="@color/white"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="@string/display_scroll_bars"
+                    android:textColor="@color/white" />
+
+                <ImageView
+                    android:id="@+id/imageView9"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="15dp"
+                    app:srcCompat="@drawable/scrollbar" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/soundsSettingsLinearLayout"
+                android:layout_width="326dp"
+                android:layout_height="59dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/rectangle_background"
+                android:elevation="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/useSoundsCheckBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#2C2C3C"
+                    android:buttonTint="@color/white"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="@string/use_sounds"
+                    android:textColor="@color/white" />
+
+                <ImageView
+                    android:id="@+id/imageView10"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="15dp"
+                    app:srcCompat="@drawable/sounds" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

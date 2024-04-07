@@ -2,6 +2,7 @@ package com.ds.messengerapplication.util;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Build;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +21,7 @@ import com.ds.messengerapplication.R;
 import com.ds.messengerapplication.dialogs.ErrorDialog;
 import com.ds.messengerapplication.user.UserController;
 import com.ds.messengerapplication.user.database.databaseGetterAndSetter.DatabaseValuesGetter;
+import com.ds.messengerapplication.util.interfaces.IOnAction;
 import com.ds.messengerapplication.util.sounds.SoundPlayer;
 import com.ds.messengerapplication.util.sounds.SoundsConstants;
 import com.google.android.gms.tasks.Task;
@@ -28,7 +30,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalTime;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
@@ -116,7 +117,12 @@ public abstract class Utils extends Constants {
     }
 
     public static void displayEmail(@NonNull TextView userMailTextView) {
-        userMailTextView.setText(Objects.requireNonNull(UserController.getInstance().getFirebaseAuth().getCurrentUser()).getEmail());
+        String userMail = Objects.requireNonNull(UserController.getInstance().getFirebaseAuth().getCurrentUser()).getEmail();
+
+        userMailTextView.setText(userMail);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            userMailTextView.setTooltipText(userMail);
+        }
     }
 
     public static void checkIsTaskIsNotSuccessfulOrCanceled(@NonNull Task task, Context context){

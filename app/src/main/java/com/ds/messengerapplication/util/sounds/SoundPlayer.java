@@ -8,7 +8,7 @@ import android.util.Log;
 
 import com.ds.messengerapplication.dialogs.ErrorDialog;
 import com.ds.messengerapplication.user.UserCurrentSettings;
-import com.ds.messengerapplication.util.IOnActionWithParameter;
+import com.ds.messengerapplication.util.interfaces.IOnActionWithParameter;
 
 public abstract class SoundPlayer {
     private static MediaPlayer mediaPlayer;

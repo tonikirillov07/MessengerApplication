@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.ds.messengerapplication.util.interfaces.IOnAction;
+
 public class PermissionsUtils {
     private static ActivityResultLauncher<String[]> activityResultLauncher;
 

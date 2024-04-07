@@ -15,8 +15,7 @@ import androidx.core.content.ContextCompat;
 
 import com.ds.messengerapplication.R;
 import com.ds.messengerapplication.dialogs.ErrorDialog;
-import com.ds.messengerapplication.util.IOnAction;
-import com.ds.messengerapplication.util.IOnActionWithParameter;
+import com.ds.messengerapplication.util.interfaces.IOnActionWithParameter;
 import com.ds.messengerapplication.util.Utils;
 import com.ds.messengerapplication.util.sounds.SoundPlayer;
 import com.ds.messengerapplication.util.sounds.SoundsConstants;

@@ -1,5 +1,6 @@
 package com.ds.messengerapplication.activities.settings;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.ds.messengerapplication.Constants;
 import com.ds.messengerapplication.R;
 import com.ds.messengerapplication.activities.initialSetup.InitialSetupSecondActivity;
+import com.ds.messengerapplication.activities.services.RestorePasswordActivity;
 import com.ds.messengerapplication.dialogs.ConfirmDialog;
 import com.ds.messengerapplication.dialogs.ErrorDialog;
 import com.ds.messengerapplication.user.UserController;
@@ -29,7 +31,7 @@ public class MainSettingsUserBlock extends AppCompatActivity {
     private LinearLayout deleteAccountButton, logOutAccountButton;
     private AvatarView avatarView;
     private ImageButton backButton;
-    private Button changeEmailButton;
+    private Button changeEmailButton, changePasswordButton;
     private boolean isOnline = true;
 
     @Override
@@ -47,6 +49,7 @@ public class MainSettingsUserBlock extends AppCompatActivity {
             avatarView = findViewById(R.id.userAvatar);
             backButton = findViewById(R.id.backButton);
             changeEmailButton = findViewById(R.id.changeEmailButton);
+            changePasswordButton = findViewById(R.id.changePasswordButton);
 
             initButtons();
             initUserData();
@@ -58,7 +61,6 @@ public class MainSettingsUserBlock extends AppCompatActivity {
     private void initUserData() {
         Utils.displayUserDate(this, avatarView, dateOfRegTextView, userMailTextView);
         Utils.displayEmail(userMailInMailBlock);
-        Utils.displayEmail(userMailInMailBlock);
     }
 
     private void initButtons() {
@@ -66,7 +68,6 @@ public class MainSettingsUserBlock extends AppCompatActivity {
             deleteAccountButton.setOnClickListener(click -> Utils.onDefaultButtonClick(deleteAccountButton, () -> ConfirmDialog.showDialog(this, getResources().getString(R.string.account_deleting_confirm), () -> {
                 try {
                     Objects.requireNonNull(UserController.getInstance().getFirebaseAuth().getCurrentUser()).delete();
-                    UserController.logOut();
                     UserController.getInstance().getFirebaseAuth().getCurrentUser().delete();
                     goToLogInActivity();
                 }catch (Exception e){
@@ -91,6 +92,11 @@ public class MainSettingsUserBlock extends AppCompatActivity {
             switchStatus.setOnClickListener(click -> switchStatus());
             changeEmailButton.setOnClickListener(click -> {
                 SoundPlayer.create(this, SoundsConstants.CLICK_SOUND_PATH, true);
+            });
+            changePasswordButton.setOnClickListener(click -> {
+                SoundPlayer.create(this, SoundsConstants.CLICK_SOUND_PATH, true);
+
+                AnotherActivity.gotoAnotherActivity(this, RestorePasswordActivity.class, false);
             });
 
             ControlsBar.initActions(this, findViewById(R.id.mainButton), findViewById(R.id.messengerButton));
