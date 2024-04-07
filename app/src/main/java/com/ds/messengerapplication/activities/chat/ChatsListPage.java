@@ -13,8 +13,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.ds.messengerapplication.Constants;
 import com.ds.messengerapplication.R;
 import com.ds.messengerapplication.activities.settings.MainSettingsPage;
+import com.ds.messengerapplication.dialogs.InfoDialog;
+import com.ds.messengerapplication.user.UserController;
 import com.ds.messengerapplication.util.AnotherActivity;
 import com.ds.messengerapplication.util.Utils;
+
+import java.util.Objects;
 
 public class ChatsListPage extends AppCompatActivity {
     private ImageButton settingsButton, addChatButton;

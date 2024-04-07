@@ -1,6 +1,5 @@
 package com.ds.messengerapplication.activities.settings;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;

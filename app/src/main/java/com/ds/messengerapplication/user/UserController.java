@@ -6,7 +6,9 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.ds.messengerapplication.Constants;
+import com.ds.messengerapplication.R;
 import com.ds.messengerapplication.dialogs.ErrorDialog;
+import com.ds.messengerapplication.dialogs.InfoDialog;
 import com.ds.messengerapplication.user.database.databaseGetterAndSetter.DatabaseValueSetter;
 import com.ds.messengerapplication.util.interfaces.IOnAction;
 import com.google.firebase.auth.FirebaseAuth;
@@ -56,9 +58,9 @@ public class UserController extends Constants {
             if(user != null){
                 user.sendEmailVerification().addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
-                        Log.i("AUTH_STATE_LISTENER", "Verification success");
+                        Log.i(AUTH_STATE_LISTENER, "Verification success");
                     }else{
-                        Log.e("AUTH_STATE_LISTENER", Objects.requireNonNull(task.getException()).toString());
+                        Log.e(AUTH_STATE_LISTENER, Objects.requireNonNull(task.getException()).toString());
                     }
                 });
             }

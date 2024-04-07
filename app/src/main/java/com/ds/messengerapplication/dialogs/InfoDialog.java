@@ -4,16 +4,15 @@ import android.content.Context;
 
 import androidx.appcompat.app.AlertDialog;
 
-import com.ds.messengerapplication.util.interfaces.IOnAction;
+import com.ds.messengerapplication.R;
 
-public final class ConfirmDialog {
-    public static void showDialog(Context context, String message, IOnAction onPositiveAction, int iconId){
+public class InfoDialog {
+    public static void showDialog(Context context, String message, int iconId){
         try {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+            alertDialog.setTitle(context.getString(R.string.info));
             alertDialog.setMessage(message);
             alertDialog.setIcon(iconId);
-            alertDialog.setPositiveButton(android.R.string.yes, (dialog, whichButton) -> onPositiveAction.onAction());
-            alertDialog.setNegativeButton(android.R.string.no, null);
             alertDialog.show();
         }catch (Exception e){
             ErrorDialog.showDialog(context, e, true);

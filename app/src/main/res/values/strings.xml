@@ -85,7 +85,8 @@
     <string name="set_online_status">Set online status</string>
     <string name="conversations">Conversations</string>
     <string name="settings_reset_confirm">Do you really want to reset you settings?</string>
-    <string name="wait_for_it">Wait for it...</string>
+    <string name="wait_for_it">Wait for it…</string>
+    <string name="info">Info</string>
 
     <string name="main_page_image_button_tag" translatable="false">Main Page</string>
     <string name="chat_page_image_button_tag" translatable="false">Chat Page</string>
@@ -94,5 +95,6 @@
     <string name="as_in_system_theme_radio_button_tag" translatable="false">As In System Theme</string>
 
     <string name="your_message">Your message</string>
+    <string name="your_account_not_verified">Your account has not been verified. Check your email and confirm your account</string>
     <string name="or_enter_your_previous_password">Or enter your current password</string>
 </resources>

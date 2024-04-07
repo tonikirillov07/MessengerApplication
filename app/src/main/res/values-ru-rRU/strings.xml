@@ -53,7 +53,7 @@
     <string name="go_back">Назад</string>
     <string name="changing_password">Смена пароля</string>
     <string name="i_m_forgot_my_password">Я забыл свой пароль...</string>
-    <string name="an_exception_has_occurred">Возникло исключение</string>
+    <string name="an_exception_has_occurred">Возникло некоторое исключение</string>
     <string name="well_lets_log_in">Хорошо, тогда давайте войдем в ваш аккаунт</string>
     <string name="fill_in_this_field">Заполните поле</string>
     <string name="rate_this_app_using_slider">Оцените приложение, используя слайдер</string>
@@ -78,4 +78,6 @@
     <string name="your_message">Ваше сообщение</string>
     <string name="settings_reset_confirm">Вы действительно хотите сбросить ваши настройки?</string>
     <string name="or_enter_your_previous_password">Или введите ваш текущий пароль</string>
+    <string name="your_account_not_verified">Ваш аккаунт не подтвержден. Проверьте вашу почту и подтвердите ваш аккаунт</string>
+    <string name="info">Информация</string>
 </resources>
